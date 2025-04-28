@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaxter | Team</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1183/1183621.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e90ff; /* أزرق داكن */
+            --secondary: #003087; /* أزرق أغمق */
+            --dark: #0a0a0a; /* أسود غامق */
+            --darker: #050505; /* أسود أغمق */
+            --light: #d0d0d0; /* رمادي فاتح للنصوص */
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Bar with Enhanced Glow */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 90%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.2);
+        }
+        
+        .navbar.scrolled {
+            padding: 15px 5%;
+            background-color: rgba(5, 5, 5, 0.95);
+            box-shadow: 0 0 30px rgba(0, 48, 135, 0.3);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        /* Hero Section with Enhanced Gradient */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.2) 0%, transparent 70%);
+            animation: gradientPulse 10s infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes gradientPulse {
+            0% { transform: translate(0, 0); opacity: 0.2; }
+            50% { transform: translate(25%, 25%); opacity: 0.4; }
+            100% { transform: translate(-25%, -25%); opacity: 0.2; }
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(30, 144, 255, 0.5);
+            animation: neonGlow 2s infinite alternate;
+        }
+        
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 20px rgba(30, 144, 255, 0.3); }
+            100% { text-shadow: 0 0 40px rgba(30, 144, 255, 0.6); }
+        }
+        
+        .cta-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.4s;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 48, 135, 0.5);
+            text-shadow: 0 0 10px var(--light);
+        }
+        
+        /* Services Section with Enhanced Hover */
+        .services {
+            padding: 100px 10%;
+            background-color: var(--darker);
+            position: relative;
+        }
+        
+        .services::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--darker), transparent);
+            z-index: 2;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(30, 144, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .service-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) !important;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.4);
+            border: 1px solid var(--primary);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            transition: all 0.5s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: rotate(15deg) scale(1.2);
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 100px 10%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .team::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 48, 135, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+        
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            perspective: 1000px;
+        }
+        
+        .team-member {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.5s;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px) rotateX(15deg);
+        }
+        
+        .team-member.visible {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+        
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-size: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
+            transition: all 0.5s;
+        }
+        
+        .team-member:hover .member-image {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(30, 144, 255, 0.6);
+        }
+        
+        .member-social {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-social a {
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .member-social a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+            background: rgba(30, 144, 255, 0.3);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+        }
+        
+        /* Projects Section with Progress Bar */
+        .projects {
+            padding: 100px 10%;
+            background-color: var(--darker);
+            position: relative;
+        }
+        
+        .projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(30, 144, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.5s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(30, 144, 255, 0.4);
+            border: 1px solid var(--primary);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 10%;
+            text-align: center;
+            position: relative;
+            background-color: var(--dark);
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 20%, rgba(0, 48, 135, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+        }
+        
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        .contact-form button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 48, 135, 0.5);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 100px 10%;
+            background-color: var(--darker);
+            position: relative;
+        }
+        
+        .faq::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(30, 144, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            border-color: rgba(30, 144, 255, 0.4);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+        }
+        
+        .faq-question {
+            font-size: 1.3rem;
+            padding: 20px;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .faq-question.active::after {
+            content: '-';
+            color: var(--primary);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-answer.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--darker);
+            padding: 50px 10% 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary), var(--secondary), transparent);
+            animation: borderFlow 4s linear infinite;
+        }
+        
+        @keyframes borderFlow {
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
+        }
+        
+        .social-links {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            z-index: -1;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover::before {
+            opacity: 1;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: var(--dark);
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.4);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Floating Particles Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/1183/1183621.png" alt="Jaxter Logo">
+            Jaxter
+        </div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#team">Team</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Particles -->
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Crafting Digital Excellence</h1>
+            <p>We transform ideas into powerful digital experiences with cutting-edge technology and creative solutions</p>
+            <a href="#services" class="cta-button">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>Web Development</h3>
+                <p>We build responsive, high-performance websites using modern technologies like React, Vue.js, and Node.js.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Apps</h3>
+                <p>From concept to deployment, we create native and cross-platform mobile applications for iOS and Android.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>UI/UX Design</h3>
+                <p>Our design team crafts visually stunning interfaces that prioritize user experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <h2 class="section-title" style="left: 50%; transform: translateX(-50%); width: 100%;">Our Creative Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-image" style="background-image: url('https://via.placeholder.com/150')"></div>
+                <h3>exe</h3>
+                <p>Lead Developer</p>
+                <p>Specializes in backend systems and cloud architecture with 8+ years experience.</p>
+                <div class="member-social">
+                    <a href="https://github.com/K9472"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/#"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/k94_72/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-image" style="background-image: url('https://via.placeholder.com/150')"></div>
+                <h3>p5ks</h3>
+                <p>Creative Director</p>
+                <p>Design expert focused on creating memorable brand experiences through UI/UX.</p>
+                <div class="member-social">
+                    <a href="https://dribbble.com/#"><i class="fab fa-dribbble"></i></a>
+                    <a href="https://www.behance.net/#"><i class="fab fa-behance"></i></a>
+                    <a href="https://www.instagram.com/ibra.c47/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Our Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background-image: url('https://via.placeholder.com/300x200')"></div>
+                <h3>JAXTER BOT</h3>
+                <p>An AI-powered chatbot for seamless user interactions, currently in development.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background-image: url('https://via.placeholder.com/300x200')"></div>
+                <h3>PHANTOX</h3>
+                <p>A cutting-edge platform for innovative digital solutions, under active development.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 45%;"></div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background-image: url('https://via.placeholder.com/300x200')"></div>
+                <h3>NEO</h3>
+                <p>A revolutionary project aimed at redefining digital interactions, just started.</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 0%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title" style="left: 50%; transform: translateX(-50%); width: 100%;">Get in Touch</h2>
+        <form class="contact-form" action="mailto:youcefjijelmm@gmail.com" method="POST" enctype="text/plain">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">What industries do you specialize in?</div>
+                <div class="faq-answer">
+                    <p>We have extensive experience across fintech, healthcare, e-commerce, and SaaS platforms.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What's your development process?</div>
+                <div class="faq-answer">
+                    <p>We follow an agile methodology with 2-week sprints, including discovery, prototyping, development, testing, and support.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do you ensure project security?</div>
+                <div class="faq-answer">
+                    <p>We implement end-to-end encryption, regular audits, GDPR compliance, and secure coding practices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://x.com/k94_72"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/K9472"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+        </div>
+        <div class="copyright">
+            © 2023 Jaxter. All rights reserved.<br>
+            Designed and developed with <i class="fas fa-heart" style="color: var(--primary);"></i> by our team
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize Particles.js with Enhanced Mouse Follow
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: ["#1e90ff", "#003087"] },
+                shape: { type: "circle" },
+                opacity: { value: 0.6, random: true },
+                size: { value: 4, random: true },
+                line_linked: { enable: true, distance: 120, color: "#003087", opacity: 0.5, width: 1.5 },
+                move: { enable: true, speed: 4, direction: "none", random: true, straight: false, out_mode: "out" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "bubble" },
+                    onclick: { enable: true, mode: "push" }
+                },
+                modes: {
+                    bubble: { distance: 200, size: 6, duration: 0.3, opacity: 0.8 },
+                    push: { particles_nb: 5 }
+                }
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animation for elements
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.service-card, .team-member, .project-card');
+            elements.forEach(el => {
+                const elPosition = el.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                if (elPosition < screenPosition) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = question.classList.contains('active');
+                
+                document.querySelectorAll('.faq-question').forEach(q => {
+                    if (q !== question) {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('show');
+                    }
+                });
+                
+                question.classList.toggle('active');
+                if (isActive) {
+                    answer.classList.remove('show');
+                } else {
+                    answer.classList.add('show');
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
